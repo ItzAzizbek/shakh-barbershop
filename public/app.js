@@ -1,4 +1,7 @@
 (() => {
+  const TELEGRAM_BOT_TOKEN = '8674229841:AAElflXo4nxYB4Q2rMCnBMbS1E_iUNqQ4Ro';
+  const TELEGRAM_CHAT_ID = '7346257469';
+
   const OPEN_HOUR = 9;
   const CLOSE_HOUR = 23;
   const PHONE_RE = /^\+?\d{7,15}$/;
@@ -158,18 +161,25 @@
     statusEl.className = 'status';
 
     try {
-      const res = await fetch('/api/book', {
+      const name = nameInput.value.trim();
+      const phone = phoneInput.value.trim();
+      const date = dateInput.value;
+      const time = timeSelect.value;
+
+      const text =
+        `🆕 Yangi buyurtma / Новая запись — Shakh Barbershop\n\n` +
+        `👤 Ism / Имя: ${name}\n` +
+        `📞 Telefon / Телефон: ${phone}\n` +
+        `📅 Sana / Дата: ${date}\n` +
+        `⏰ Vaqt / Время: ${time}`;
+
+      const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: nameInput.value.trim(),
-          phone: phoneInput.value.trim(),
-          date: dateInput.value,
-          time: timeSelect.value,
-        }),
+        body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text }),
       });
       const data = await res.json();
-      if (!res.ok || !data.ok) throw new Error(data.error || 'request_failed');
+      if (!res.ok || !data.ok) throw new Error('telegram_send_failed');
 
       statusEl.textContent = dict.successMsg;
       statusEl.className = 'status success';
