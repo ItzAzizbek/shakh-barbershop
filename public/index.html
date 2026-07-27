@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Shakh Barbershop</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" class="lang-btn is-active" data-lang="uz">UZ</button>
+        <span class="lang-sep">/</span>
+        <button type="button" class="lang-btn" data-lang="ru">RU</button>
+      </div>
+      <h1 class="brand">Shakh</h1>
+      <p class="tagline" data-i18n="tagline">Barbershop</p>
+    </header>
+
+    <main class="main">
+      <form id="booking-form" class="form" novalidate>
+        <div class="field">
+          <label for="name" data-i18n="nameLabel">To'liq ism</label>
+          <input id="name" name="name" type="text" autocomplete="name" data-i18n-placeholder="namePlaceholder" required>
+          <p class="error" id="name-error"></p>
+        </div>
+
+        <div class="field">
+          <label for="phone" data-i18n="phoneLabel">Telefon raqami</label>
+          <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+998 90 123 45 67" required>
+          <p class="error" id="phone-error"></p>
+        </div>
+
+        <div class="field">
+          <label for="date" data-i18n="dateLabel">Sana</label>
+          <input id="date" name="date" type="date" required>
+          <p class="error" id="date-error"></p>
+        </div>
+
+        <div class="field">
+          <label for="time" data-i18n="timeLabel">Vaqt</label>
+          <select id="time" name="time" required></select>
+          <p class="error" id="time-error"></p>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submit-btn">
+          <span data-i18n="submit">Yozilish</span>
+        </button>
+      </form>
+
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+    </main>
+
+    <footer class="footer">
+      <p data-i18n="hours">Ish vaqti: 09:00 – 23:00</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
